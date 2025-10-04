@@ -6,7 +6,7 @@ export default defineConfig({
   expect: { timeout: 5000 },
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
-    headless: false,
+    headless: true,
     actionTimeout: 0,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
