@@ -21,8 +21,16 @@ test.describe('E2E tests for https://e-commerce-kib.netlify.app/', () => {
         // Create the product
         await page.getByRole('button', { name: 'Create Product' }).click();
 
-        // Verify product is visible
-        await expect(page.getByText('UltraSoft Wireless Headphones')).toBeVisible();
+       const productName = 'UltraSoft Wireless Headphones';
+        const product = page.getByText(productName, {exact: true});
+
+        while (!(await product.isVisible())) {
+        await page.evaluate(() => {
+        window.scrollBy(0, 200); 
+    });
+    await page.waitForTimeout(200);
+}
+await expect(product).toBeVisible();
     });
 
     // Negative scenario: try creating a product without required fields
